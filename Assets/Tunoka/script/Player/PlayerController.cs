@@ -4,12 +4,22 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public Material[] modelMaterial; //モデルのマテリアル
-
+    public Camera camera;
     private PlayerStatus _pStatus;
     private bool alphaZero; //アルファが0.5以下になったらtreu　0.9以上になったらfalse
+
+    NavMeshAgent agent;
+
+    private Vector3 targetPosition;	//　移動する位置
+    [SerializeField, Header("移動スピード")]
+    public float _speed;				//　移動スピード
+
+    
     // Use this for initialization
     void Start () {
+        
         _pStatus = transform.GetComponent<PlayerStatus>();
+        agent = GetComponent<NavMeshAgent>();
 
     }
 	
@@ -30,33 +40,33 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-
-        // 右・左
-        float x = Input.GetAxisRaw("Horizontal")   ;
-
-        // 上・下
-        float z = Input.GetAxisRaw("Vertical")  ;
-
-        //左右反転
-        Vector3 scale = transform.localScale;
-        if (x >= 0)
+        var scale = transform.localScale;
+        agent.speed = _speed;
+        if (Input.GetMouseButton(0))
         {
-            // 右方向に移動中
-            scale.x = scale.x * 1; // そのまま（右向き）
-        }
-        else {
-            // 左方向に移動中
-            scale.x = scale.x * - 1; // 反転する（左向き）
-        }
-        
+            RaycastHit hit;
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                targetPosition = new Vector3(
+                    hit.point.x,
+                    transform.position.y,
+                    hit.point.z
+                    );
+                if (transform.position.x - targetPosition.x <= 0)
+                {
+                    // 右方向に移動中
+                    scale.x = 1.25f; // そのまま（右向き）
+                }
+                else { scale.x = -1.25f; }
 
-        // 移動する向きを求める
-        Vector3 direction = new Vector3(x, 0, z).normalized;
+                // 代入し直す
+                transform.localScale = scale;
+                agent.SetDestination(targetPosition);
 
-        // 代入し直す
-        transform.localScale =  scale ;
-        // 移動する向きとスピードを代入する
-        GetComponent<Rigidbody>().velocity = direction * _pStatus._moveSpeed * Time.deltaTime;
+            }
+        }
+       
         //Material変化
         materialChange();
     }

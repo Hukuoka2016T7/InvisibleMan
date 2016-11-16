@@ -7,10 +7,11 @@ public class RayTest : MonoBehaviour {
 
     void Update()
     {
+        int layerMask = ~(1 << 8);
         RaycastHit hit;
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             if (hit.transform.tag == "Stage")
             {

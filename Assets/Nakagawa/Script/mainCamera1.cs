@@ -6,12 +6,12 @@ public class mainCamera1 : MonoBehaviour {
 
     private Vector3 offset;
 
-    // public GameObject player;
+    public float Distance = 40.0f;
+    public float Fixid = 30.0f;
 
     // Use this for initialization
     void Start()
     {
-        // offset = transform.position - target.transform.position;
 
         target = GameObject.Find("Player").transform;
 
@@ -19,16 +19,15 @@ public class mainCamera1 : MonoBehaviour {
 
     void Update()
     {
-        // transform.position = target.position + offset;
 
-        transform.position = new Vector3(target.position.x, transform.position.y, transform.position.z);
+        transform.position = new Vector3(target.position.x + 6, transform.position.y, transform.position.z);
 
 
-        /* if (transform.position.x >= 30)
-         {
-             transform.position = new Vector3(18, transform.position.y, transform.position.z);
-         }*/
-
+        if(target.position.x > Distance)
+        {
+            transform.position = new Vector3(Fixid, transform.position.y, transform.position.z);
+        }
     }
+
 
 }

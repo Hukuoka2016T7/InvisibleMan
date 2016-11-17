@@ -14,10 +14,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Header("移動スピード")]
     private float _speed;               //　移動スピード
 
+    [SerializeField, Header("確認用[隠れるものに当たってるか]")]
     private GameObject _hideTr;
+    [SerializeField, Header("確認用[アイテムに当たってるか]")]
     private GameObject _itemTr;
-
+    [SerializeField, Header("確認用[プレイヤーをタッチしたか]")]
+    private bool _PTr;
     private float _deltaTime;
+
+
+    private Vector3 touchStartPos;//フリック用
+    private Vector3 touchEndPos;//フリック用
+    public float touchStartTime = 0;//フリック用
 
     // Use this for initialization
     void Start () {
@@ -35,7 +43,7 @@ public class PlayerController : MonoBehaviour
         Transparency();
 
         //その他
-      
+        
 
         if (_hideTr == null)
         {
@@ -49,11 +57,11 @@ public class PlayerController : MonoBehaviour
         agent.speed = _speed * _deltaTime;//スピード変更
         if (Input.GetMouseButtonDown(0))
         {
-            int layerMask = ~(1 << 8);
+            //int layerMask = ~(1 << 8);
             RaycastHit hit;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag == "HideBloc")//隠れるブロックをクリック
                 {
@@ -90,7 +98,7 @@ public class PlayerController : MonoBehaviour
                      );
                 }
 
-                if (hit.transform.tag == "Stage" )//ステージをクリック
+                if (hit.transform.tag == "Stage")//ステージをクリック
                 {
                     targetPosition = new Vector3(
                         hit.point.x,
@@ -98,6 +106,16 @@ public class PlayerController : MonoBehaviour
                         hit.point.z
                     );
                     _hideTr = null;
+                }
+                if (hit.transform.tag == "Player")//プレイヤーを触っていたら
+                {
+                    touchStartTime = 0;
+                    _PTr = true;
+                    //フリック用タッチした時の場所
+                    touchStartPos = new Vector3(Input.mousePosition.x,
+                                  Input.mousePosition.y,
+                                  Input.mousePosition.z);
+                    return;
                 }
 
                 agent.enabled = true;//ナビメッシュをつける
@@ -114,11 +132,19 @@ public class PlayerController : MonoBehaviour
                 // 代入し直す
                 transform.localScale = scale;
                 agent.SetDestination(targetPosition);
-
             }
+
         }
-       
+        if (Input.GetKeyUp(KeyCode.Mouse0) && _PTr == true)//フリック用タッチを話した時
+        {
+            touchEndPos = new Vector3(Input.mousePosition.x,
+                               Input.mousePosition.y,
+                               Input.mousePosition.z);
+            GetDirection();
+            _PTr = false;
+        }
         //Material変化
+        touchStartTime += _deltaTime/100;//フリック用時間
         materialChange();
     }
     void Transparency()//透明度
@@ -189,8 +215,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void GetDirection()//フリック判定
+    {
+        float directionX = touchEndPos.x - touchStartPos.x;
+        float directionY = touchEndPos.y - touchStartPos.y;
+
+        if (Mathf.Abs(directionX) < Mathf.Abs(directionY)){
+            if (30 < directionY && touchStartTime <= 0.5f)
+            {
+                _pStatus.awayItem(0);
+                print("フリックしたよ");
+            }
+        }
+    }
+
+    public void Appea(int num)
+    {
+
+        _pStatus._hide = 1;//隠れていない状態にする
+        //_pStatus.anime = 3;
+        _pStatus._appea = num;
+
+        print(_pStatus._appea);
+        agent.enabled = true;//ナビメッシュをつける
+        agent.SetDestination(transform.position);
+    }
+
     void OnTriggerStay(Collider other)
     {
+        print(other.name);
         //仮隠れるコマンド
         if (other.transform.tag == "HideBloc")
         {

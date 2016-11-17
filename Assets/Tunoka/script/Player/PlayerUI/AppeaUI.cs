@@ -14,15 +14,17 @@ public class AppeaUI : MonoBehaviour {
     [SerializeField, Header("UIの移動スピード")]
     public float _moveSpeed = 60;
 
-    
+    private PlayerController _playerController;
+
     void Start () {
         _closeP = transform.localPosition;
         _openP = new Vector2(-18.2f, _closeP.y);
+        _playerController = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<PlayerController>();
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
          if (Time.deltaTime <= 0){return;}
         direction();
@@ -30,6 +32,8 @@ public class AppeaUI : MonoBehaviour {
     }
     void direction()//演出
     {
+        //_playerController.Appea(0);
+
         if (_status == 1)//開くときの演出
         {
             transform.localPosition = Vector2.MoveTowards(transform.localPosition, _openP, _status*2);
@@ -37,7 +41,6 @@ public class AppeaUI : MonoBehaviour {
             if (transform.localPosition.x == _openP.x)
             {
                 _cursor.transform.eulerAngles =new Vector3(0f, 0f, 0f);
-                print(_cursor.transform.localRotation);
                 _status = 2;
             }
         }

@@ -25,6 +25,11 @@ public class ItemStatus : MonoBehaviour {
         transform.GetComponent<BoxCollider>().enabled = true;
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         _rigidbody.useGravity = true;
+
+        _rigidbody.AddForce(
+            Vector3.left  + Vector3.up * 3,
+            ForceMode.VelocityChange
+        );
     }
     public void setItemStatus(GameObject _obj)
     {
@@ -36,7 +41,7 @@ public class ItemStatus : MonoBehaviour {
     }
     void OnTriggerStay(Collider other)
     {
-        if (other.transform.tag == "Stage")
+        if (other.transform.tag == "Stage")//地面に触れたら止まる
         {
             if (_rigidbody.useGravity == true)
             {

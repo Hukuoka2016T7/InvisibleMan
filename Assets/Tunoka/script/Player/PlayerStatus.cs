@@ -9,10 +9,12 @@ public class PlayerStatus : MonoBehaviour {
     public float _invisibleGage = 0;
     [SerializeField, Header("透明か（true なら透明）")]
     public bool _invisibleTr = true;
-    [SerializeField, Header("隠れるコマンド（0なら隠れる　それ以外は隠れる）")]
+    [SerializeField, Header("隠れるコマンド（0なら隠れてない　それ以外は隠れる）")]
     public int _hide = 0;
-    [SerializeField, Header("Animation（0-基本たち　1－隠れる　2－歩く）")]
+    [SerializeField, Header("Animation（0-基本たち　1－隠れる　2－歩く 3:ﾎﾟｰｽﾞ）")]
     public int anime = 0;
+    [SerializeField, Header("ポージングID")]
+    public int _appea = 0;
     [SerializeField, Header("羞恥ゲージ (%)")]
     public float _embarrassedGage = 0;
     [SerializeField, Header("笑いゲージ (%)")]
@@ -109,8 +111,22 @@ public class PlayerStatus : MonoBehaviour {
         }
         _items[num].GetComponent<ItemStatus>().awayItemStatus();
         _items[num] = null;
-        _items[0] = _items[1];//セットし直す
-        _items[1] = _items[2];
-        _items[2] = null;
+
+        if (_items[0] == null)
+        {
+            _items[0] = _items[1];//セットし直す
+            _items[1] = _items[2];
+            _items[2] = null;
+        }
+        else if (_items[1] == null)
+        {
+            _items[1] = _items[2];
+            _items[2] = null;
+        }
+        else if (_items[2] == null)
+        {
+            _items[2] = null;
+        }
+        
     }
 }

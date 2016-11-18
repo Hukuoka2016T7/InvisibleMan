@@ -57,11 +57,12 @@ public class PlayerController : MonoBehaviour
         agent.speed = _speed * _deltaTime;//スピード変更
         if (Input.GetMouseButtonDown(0))
         {
-            //int layerMask = ~(1 << 8);
+
+            int layerMask = ~(1 << 8);
             RaycastHit hit;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out hit))
             {
                 if (hit.transform.tag == "HideBloc")//隠れるブロックをクリック
                 {
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
                           hit.point.z
                       );
                 }
-                if (hit.transform.tag == "Item")//アイテムをクリック
+                else if (hit.transform.tag == "Item")//アイテムをクリック
                 {
                     if (_itemTr == hit.transform.gameObject)//拾う
                     {
@@ -97,8 +98,7 @@ public class PlayerController : MonoBehaviour
                          hit.point.z
                      );
                 }
-
-                if (hit.transform.tag == "Stage")//ステージをクリック
+                else//ステージをクリック
                 {
                     targetPosition = new Vector3(
                         hit.point.x,
@@ -107,6 +107,7 @@ public class PlayerController : MonoBehaviour
                     );
                     _hideTr = null;
                 }
+
                 if (hit.transform.tag == "Player")//プレイヤーを触っていたら
                 {
                     touchStartTime = 0;
@@ -243,7 +244,6 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        print(other.name);
         //仮隠れるコマンド
         if (other.transform.tag == "HideBloc")
         {

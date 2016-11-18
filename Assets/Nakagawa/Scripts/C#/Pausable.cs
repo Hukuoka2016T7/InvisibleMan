@@ -2,7 +2,6 @@
 using System.Collections;
 // 追加
 using UnityEngine.SceneManagement;
-using UnityStandardAssets.Characters.FirstPerson;
 
 public class Pausable : MonoBehaviour
 {
@@ -11,6 +10,8 @@ public class Pausable : MonoBehaviour
     public GameObject OnPanel, OnUnPanel;
     public GameObject Cube;
     private bool pauseGame = false;
+
+    private float time = 0.0f;
 
     void Start()
     {
@@ -41,11 +42,11 @@ public class Pausable : MonoBehaviour
         OnUnPanel.SetActive(false);     // PanelEscをfalseにする
         Time.timeScale = 0;
         pauseGame = true;
-        // FirstPersonController fpc = player.GetComponent<FirstPersonController>();
-        //  fpc.enabled = false;
 
         Cursor.lockState = CursorLockMode.None;     // 標準モード
         Cursor.visible = true;    // カーソル表示
+
+        
     }
 
     public void OnUnPause()
@@ -54,8 +55,6 @@ public class Pausable : MonoBehaviour
         OnUnPanel.SetActive(true);      // PanelEscをtrueにする
         Time.timeScale = 1;
         pauseGame = false;
-       // FirstPersonController fpc = player.GetComponent<FirstPersonController>();
-      //  fpc.enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;   // 中央にロック
         Cursor.visible = false;     // カーソル非表示
@@ -63,7 +62,7 @@ public class Pausable : MonoBehaviour
 
     public void OnRetry()
     {
-        // SceneManager.LoadScene("Scene_01");
+         SceneManager.LoadScene("Select");
     }
 
     public void OnResume()

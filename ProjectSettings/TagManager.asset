@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Stage
+  - Goal
+  - Fixing
+  - PhotoTR
+  - PhotoFA
+  - ' Photo'
   layers:
   - Default
   - TransparentFX

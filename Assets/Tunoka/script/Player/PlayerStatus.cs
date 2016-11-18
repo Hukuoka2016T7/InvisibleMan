@@ -9,21 +9,33 @@ public class PlayerStatus : MonoBehaviour {
     public float _invisibleGage = 0;
     [SerializeField, Header("透明か（true なら透明）")]
     public bool _invisibleTr = true;
-    [SerializeField, Header("隠れるコマンド（0なら隠れる　それ以外は隠れる）")]
+    [SerializeField, Header("隠れるコマンド（0なら隠れてない　それ以外は隠れる）")]
     public int _hide = 0;
-    [SerializeField, Header("Animation（0-基本たち　1－隠れる　2－歩く）")]
+    [SerializeField, Header("Animation（0-基本たち　1－隠れる　2－歩く 3:ﾎﾟｰｽﾞ）")]
     public int anime = 0;
+    [SerializeField, Header("ポージングID")]
+    public int _appea = 0;
     [SerializeField, Header("羞恥ゲージ (%)")]
     public float _embarrassedGage = 0;
+    public bool _embarrasseTr;
+    private float count = 0;
     [SerializeField, Header("笑いゲージ (%)")]
     public float _laughterGage = 0;
+    [SerializeField, Header("持っているアイテム ")]
+    public GameObject[] _items = new GameObject[3];
+    private GameObject[] _itemNames = new GameObject[3];
 
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
+
+
+    void Start ()
+    {
+        _itemNames[0] = transform.FindChild("GetItem").gameObject.transform.FindChild("underP").gameObject;
+        _itemNames[1] = transform.FindChild("GetItem").gameObject.transform.FindChild("bodyP").gameObject;
+        _itemNames[2] = transform.FindChild("GetItem").gameObject.transform.FindChild("HeadP").gameObject;
+    }
+
 	void Update () {
+        //デバック用
         if (Input.GetKey(KeyCode.O))
         {
             embarrassed(0.5f);
@@ -40,10 +52,27 @@ public class PlayerStatus : MonoBehaviour {
         {
             laughterGage(-0.5f);
         }
+        if (Input.GetKey(KeyCode.P))
+        {
+            _invisibleGage = 100;
+        }
+        if (_embarrasseTr == true)
+        {
+            count++;
+            if (count >= 30)
+            {
+                _embarrasseTr = false;
+            }
+        }
+        else
+        {
+            count = 0;
+        }
 
     }
-    public void embarrassed(float i)
+    public void embarrassed(float i)//羞恥ゲージ変更
     {
+        _embarrasseTr = true;
         _embarrassedGage += i;
         if (_embarrassedGage < 0)
         {
@@ -54,7 +83,7 @@ public class PlayerStatus : MonoBehaviour {
             _embarrassedGage = 100;
         }
     }
-    public void laughterGage(float i)
+    public void laughterGage(float i)//笑いゲージ変更
     {
         _laughterGage += i;
         if (_laughterGage < 0)
@@ -65,5 +94,53 @@ public class PlayerStatus : MonoBehaviour {
         {
             _laughterGage = 100;
         }
+    }
+
+    public void getItem(GameObject item)//アイテムをセットする
+    {
+        if (_items[0] == null)
+        {
+            _items[0] = item;
+        }
+        else if (_items[1] == null)
+        {
+            _items[1] = item;
+        }
+        else if(_items[2] == null)
+        {
+            _items[2] = item;
+        }
+        else //持ち物がいっぱいだったら最初のを捨てる
+        {
+            awayItem(0);//捨てる
+            _items[2] = item;
+        }
+        item.GetComponent<ItemStatus>().setItemStatus(_itemNames[item.GetComponent<ItemStatus>()._parts]);
+    }
+    public void awayItem(int num)//アイテムを捨てる
+    {
+        if (_items[num] == null)
+        {
+            return;
+        }
+        _items[num].GetComponent<ItemStatus>().awayItemStatus();
+        _items[num] = null;
+
+        if (_items[0] == null)
+        {
+            _items[0] = _items[1];//セットし直す
+            _items[1] = _items[2];
+            _items[2] = null;
+        }
+        else if (_items[1] == null)
+        {
+            _items[1] = _items[2];
+            _items[2] = null;
+        }
+        else if (_items[2] == null)
+        {
+            _items[2] = null;
+        }
+        
     }
 }

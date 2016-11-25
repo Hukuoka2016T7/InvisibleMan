@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class ShynessGage : MonoBehaviour {
 
     Slider _slider;
-    public PlayerStatus _playerStatus;
+    private PlayerStatus _playerStatus;
 
     void Start () {
         _slider = transform.GetComponent<Slider>();
+        _playerStatus = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<PlayerStatus>();
     }
 	
 	void Update ()

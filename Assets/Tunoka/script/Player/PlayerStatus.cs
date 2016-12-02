@@ -11,16 +11,18 @@ public class PlayerStatus : MonoBehaviour {
     public bool _invisibleTr = true;
     [SerializeField, Header("隠れるコマンド（0なら隠れてない　それ以外は隠れる）")]
     public int _hide = 0;
-    [SerializeField, Header("Animation（0-基本たち　1－隠れる　2－歩く 3:ﾎﾟｰｽﾞ）")]
+    [SerializeField, Header("Animation（0-歩く1－基本たち　2－隠れる 3:ﾎﾟｰｽﾞ）")]
     public int anime = 0;
     [SerializeField, Header("ポージングID")]
     public int _appea = 0;
     [SerializeField, Header("羞恥ゲージ (%)")]
     public float _embarrassedGage = 0;
     public bool _embarrasseTr;
-    private float count = 0;
+    private float _embarrassecount = 0;
     [SerializeField, Header("笑いゲージ (%)")]
     public float _laughterGage = 0;
+    public bool _laughterGageTr;
+    private float _laughterGageecount = 0;
     [SerializeField, Header("持っているアイテム ")]
     public GameObject[] _items = new GameObject[3];
     private GameObject[] _itemNames = new GameObject[3];
@@ -56,24 +58,37 @@ public class PlayerStatus : MonoBehaviour {
         {
             _invisibleGage = 100;
         }
-        if (_embarrasseTr == true)
-        {
-            count++;
-            if (count >= 30)
-            {
+        //////////////////////////////////////////////////////////////////
+
+
+
+        if (_embarrasseTr == true){
+            _embarrassecount++;
+            if (_embarrassecount >= 20){
                 _embarrasseTr = false;
             }
         }
-        else
-        {
-            count = 0;
+        else{ _embarrassecount = 0; }
+
+        if (_laughterGageTr == true){
+            _laughterGageecount++;
+            if (_laughterGageecount >= 20){
+                _laughterGageTr = false;
+            }
+        }
+        else{
+            _laughterGageecount = 0;
         }
 
     }
     public void embarrassed(float i)//羞恥ゲージ変更
     {
-        _embarrasseTr = true;
         _embarrassedGage += i;
+        if (i > 0)
+        {
+            _embarrasseTr = true;
+            _embarrassecount = 0;
+        }
         if (_embarrassedGage < 0)
         {
             _embarrassedGage = 0;
@@ -86,6 +101,11 @@ public class PlayerStatus : MonoBehaviour {
     public void laughterGage(float i)//笑いゲージ変更
     {
         _laughterGage += i;
+        if (i > 0)
+        {
+            _laughterGageTr = true;
+            _laughterGageecount = 0;
+        }
         if (_laughterGage < 0)
         {
             _laughterGage = 0;

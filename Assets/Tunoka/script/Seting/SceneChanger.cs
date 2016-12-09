@@ -15,8 +15,8 @@ public class SceneChanger : MonoBehaviour {
     private int m_fadeTime = 2;
     bool m_tr = true;
 
-   // [SerializeField, Header("音楽")]
-   // private GameObject[] SaundObj;
+    [SerializeField, Header("音楽")]
+    private GameObject[] SaundObj;
 
 
     void Awake()
@@ -56,7 +56,7 @@ public class SceneChanger : MonoBehaviour {
     }
     void SetValue(float alpha)
     {
-        /*
+
         if (SaundObj != null)
         {
             float volume = 1 - alpha;
@@ -65,7 +65,7 @@ public class SceneChanger : MonoBehaviour {
                 value.GetComponent<AudioSource>().volume = volume;
             }
         }
-        */
+
         m_Fade.gameObject.GetComponent<UnityEngine.UI.Image>().color = new Color(0, 0, 0, alpha);
         if (alpha >= 1 && m_tr) SceneChange(m_scenechange);
     }

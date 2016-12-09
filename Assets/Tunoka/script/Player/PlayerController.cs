@@ -53,9 +53,10 @@ public class PlayerController : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
+            int layerMask = ~(1 << 8);
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
+                print(hit.transform.name);
                 if (hit.transform.tag == "HideBloc")//隠れるブロックをクリック
                 {
 
@@ -104,7 +105,7 @@ public class PlayerController : MonoBehaviour
                     _hideTr = null;
                 }
 
-                if (hit.transform.tag == "Player")//プレイヤーを触っていたら
+                /*if (hit.transform.tag == "Player")//プレイヤーを触っていたら
                 {
                     touchStartTime = 0;
                     _PTr = true;
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
                                   Input.mousePosition.z);
                     return;
                 }
-
+                */
                 agent.enabled = true;//ナビメッシュをつける
 
                 //方向転換関係
@@ -128,9 +129,19 @@ public class PlayerController : MonoBehaviour
                 // 代入し直す
                 transform.localScale = scale;
                 agent.SetDestination(targetPosition);
-
             }
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.tag == "Player")//プレイヤーを触っていたら
 
+                    touchStartTime = 0;
+                _PTr = true;
+                //フリック用タッチした時の場所
+                touchStartPos = new Vector3(Input.mousePosition.x,
+                              Input.mousePosition.y,
+                              Input.mousePosition.z);
+                return;
+            }
         }
         if (transform.position == targetPosition)//止まっているときの処理
         {

@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent m_Agent;
     private Transform m_Player;
     private Vector3 m_Location;
-    private State m_State = State.Idol;
+    private State m_State;
 
 	// Use this for initialization
 	void Start ()

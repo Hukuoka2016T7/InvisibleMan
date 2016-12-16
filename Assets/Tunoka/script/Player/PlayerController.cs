@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.position == targetPosition)//止まっているときの処理
         {
+            print("Stop");
             _pStatus.anime = 1;
         }
 

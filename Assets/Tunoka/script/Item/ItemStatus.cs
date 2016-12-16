@@ -18,11 +18,19 @@ public class ItemStatus : MonoBehaviour {
         _name = transform.name;
         _rigidbody = transform.GetComponent<Rigidbody>();
     }
+    void Update()
+    {
+        if (transform.root.gameObject.name == "View3D")
+        {
+        }
+    }
  
     public void awayItemStatus()//アイテムを捨てる
     {
         transform.parent = null;
         transform.GetComponent<BoxCollider>().enabled = true;
+        transform.localScale = new Vector3(0.7f, 0.7f, 0.01f);
+        transform.GetComponent<BoxCollider>().size = new Vector3 (1,2,60);
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         _rigidbody.useGravity = true;
 
@@ -36,8 +44,10 @@ public class ItemStatus : MonoBehaviour {
         transform.GetComponent<BoxCollider>().enabled = false;
         transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         transform.GetComponent<Rigidbody>().useGravity = false;
-        transform.transform.parent = _obj.transform;// _itemNames[item.GetComponent<ItemStatus>()._parts].transform;
-        transform.transform.localPosition = new Vector3(0, 0, 0);
+        transform.parent = _obj.transform;// _itemNames[item.GetComponent<ItemStatus>()._parts].transform;
+        transform.localScale = new Vector3(3.5f, 3.5f, 0.01f);
+        transform.localPosition = new Vector3(0, 0, 0);
+
     }
     void OnTriggerStay(Collider other)
     {

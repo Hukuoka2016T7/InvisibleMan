@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c3e2fd293409448b70e6699a65a249, type: 3}
+  m_Name: toumeninngenn-boy
+  m_EditorClassIdentifier: 
+  ListDataCellMap:
+  - Name: boy01
+    SizeOriginal: {x: 166, y: 164}
+    ListCell:
+    - Name: head
+      Rectangle:
+        serializedVersion: 2
+        x: 54
+        y: 4
+        width: 46
+        height: 56
+      Pivot: {x: 25, y: 48}
+    - Name: body-00
+      Rectangle:
+        serializedVersion: 2
+        x: 61
+        y: 61
+        width: 40
+        height: 62
+      Pivot: {x: 17, y: 33}
+    - Name: water
+      Rectangle:
+        serializedVersion: 2
+        x: 104
+        y: 103
+        width: 15
+        height: 30
+      Pivot: {x: 7.5, y: 15}
+    - Name: body-01
+      Rectangle:
+        serializedVersion: 2
+        x: 62
+        y: 127
+        width: 39
+        height: 28
+      Pivot: {x: 18, y: 8}
+    - Name: foot-02-left
+      Rectangle:
+        serializedVersion: 2
+        x: 5
+        y: 125
+        width: 26
+        height: 21
+      Pivot: {x: 19, y: 4.9999995}
+    - Name: foot-02-right
+      Rectangle:
+        serializedVersion: 2
+        x: 32
+        y: 126
+        width: 24
+        height: 21
+      Pivot: {x: 7, y: 4.9999995}
+    - Name: foot-00-right
+      Rectangle:
+        serializedVersion: 2
+        x: 26
+        y: 7
+        width: 23
+        height: 56
+      Pivot: {x: 12, y: 9.000001}
+    - Name: foot-01-right
+      Rectangle:
+        serializedVersion: 2
+        x: 28
+        y: 62
+        width: 23
+        height: 61
+      Pivot: {x: 10, y: 7.9999995}
+    - Name: foot-00-left
+      Rectangle:
+        serializedVersion: 2
+        x: 7
+        y: 8
+        width: 18
+        height: 56
+      Pivot: {x: 9, y: 10}
+    - Name: foot-01-left
+      Rectangle:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 26
+        height: 58
+      Pivot: {x: 14, y: 6}
+    - Name: ram-00-left
+      Rectangle:
+        serializedVersion: 2
+        x: 104
+        y: 51
+        width: 15
+        height: 46
+      Pivot: {x: 8, y: 6.9999995}
+    - Name: ram-01-left
+      Rectangle:
+        serializedVersion: 2
+        x: 122
+        y: 52
+        width: 11
+        height: 44
+      Pivot: {x: 5.5, y: 8}
+    - Name: ram-02-left
+      Rectangle:
+        serializedVersion: 2
+        x: 132
+        y: 18
+        width: 13
+        height: 28
+      Pivot: {x: 6, y: 9}
+    - Name: ram-00-right
+      Rectangle:
+        serializedVersion: 2
+        x: 134
+        y: 49
+        width: 14
+        height: 49
+      Pivot: {x: 7, y: 11.000001}
+    - Name: ram-01-right
+      Rectangle:
+        serializedVersion: 2
+        x: 149
+        y: 50
+        width: 13
+        height: 48
+      Pivot: {x: 6, y: 10.000001}
+    - Name: ram-02-right
+      Rectangle:
+        serializedVersion: 2
+        x: 145
+        y: 17
+        width: 12
+        height: 28
+      Pivot: {x: 4, y: 8}
+    - Name: box
+      Rectangle:
+        serializedVersion: 2
+        x: 124
+        y: 103
+        width: 35
+        height: 45
+      Pivot: {x: 19, y: 3.9999998}
+    - Name: eyes
+      Rectangle:
+        serializedVersion: 2
+        x: 102
+        y: 14
+        width: 28
+        height: 16
+      Pivot: {x: 12, y: 9}
+    - Name: face-00
+      Rectangle:
+        serializedVersion: 2
+        x: 106
+        y: 29
+        width: 18
+        height: 10
+      Pivot: {x: 10, y: 4}
+    - Name: face-01
+      Rectangle:
+        serializedVersion: 2
+        x: 99
+        y: 39
+        width: 16
+        height: 9
+      Pivot: {x: 10, y: 5}
+    - Name: face-02
+      Rectangle:
+        serializedVersion: 2
+        x: 118
+        y: 39
+        width: 7
+        height: 8
+      Pivot: {x: 3, y: 4}

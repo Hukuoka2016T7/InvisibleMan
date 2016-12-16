@@ -1,31 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class photoZone : MonoBehaviour
 {
 
-    private float timer = 0;
+    public float timer = 0;
     public float photoTime = 0;
     private bool Photo = false;
+    public Text Timer;
 
-    private bool C_ON_OFF = false;
-
-    public Camera mainCamera;
-    public Camera subCamera;
 
     void Start()
     {
-        subCamera.enabled = false;
+        
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        Debug.Log(timer);
+        timer -= Time.deltaTime;
+        timer = Mathf.Max(timer, 0.0f);
+
+        Timer.text = Mathf.CeilToInt(timer).ToString();
     }
 
-    public void OnCollisionEnter(Collision other)
+  /*  public void OnCollisionEnter(Collision other)
     {
 
         if (other.gameObject.tag == "PhotoTR")
@@ -37,22 +37,13 @@ public class photoZone : MonoBehaviour
         {
             Photo = false;
         }
-    }
+    }*/
 
     void OnGUI()
     {
-       if (Photo == true && timer > photoTime)
+       if ( timer <= photoTime)
          {
-            mainCamera.enabled = false;
-            subCamera.enabled = true;
             GetComponent<CaptureAndShareImage>().Shoot();
-        }
-        if (timer > photoTime)
-            timer = 0;
-        if (C_ON_OFF == true)
-        {
-            mainCamera.enabled = true;
-            subCamera.enabled = false;
         }
     }
 }

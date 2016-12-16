@@ -8,11 +8,15 @@ public class PlayerAnim : MonoBehaviour {
     public Script_SpriteStudio_Root Root;
 
 
+
+
     public int SetAnim;
+    public int Dummy = 1;
 
     void Start () {
         _pStatus = transform.GetComponent<PlayerStatus>();
-        SetAnim = 1;
+        SetAnim = 2;
+        Dummy = SetAnim;
         Root.AnimationPlay(SetAnim, 0, 0, 1);
     }
 
@@ -26,15 +30,37 @@ public class PlayerAnim : MonoBehaviour {
         }
 
         Transparency();
-
+        Anime();
 
         Root.RateSpeed = 1;
-        if (SetAnim == _pStatus.anime) return;
-        SetAnim = _pStatus.anime;
-        if (SetAnim >= 2) return;
-        Root.AnimationPlay(_pStatus.anime, 0, 0, 1);
+   
     }
 
+    void Anime()
+    {
+        if (Dummy == _pStatus.anime) return;
+        Dummy = _pStatus.anime;
+        //普通に立つ
+        if (_pStatus.anime == 1)
+        {
+            SetAnim = 2;
+        }
+        //歩く
+        if (_pStatus.anime == 0)
+        {
+            SetAnim = 1;
+        }
+        //隠れる
+        //ポージング1
+        if (_pStatus.anime == 3)
+        {
+            SetAnim = 0;
+        }
+        //if (SetAnim >= 4) return;
+        Root.AnimationPlay(SetAnim, 0, 0, 1);
+
+
+    }
     void Transparency()//透明度
     {
         //透明度変更------------------------

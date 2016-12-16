@@ -594,13 +594,13 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11468286, guid: 16542b6d6d04ca34ba9b50cf1b5cb0a9, type: 2}
-      propertyPath: m_scenechange
-      value: TPlayTest
-      objectReference: {fileID: 0}
-    - target: {fileID: 11468286, guid: 16542b6d6d04ca34ba9b50cf1b5cb0a9, type: 2}
       propertyPath: m_Fade
       value: 
       objectReference: {fileID: 1034530178}
+    - target: {fileID: 8242304, guid: 16542b6d6d04ca34ba9b50cf1b5cb0a9, type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e5550b4bec507c94faa0b6f9643e3bf6, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16542b6d6d04ca34ba9b50cf1b5cb0a9, type: 2}
   m_IsPrefabParent: 0

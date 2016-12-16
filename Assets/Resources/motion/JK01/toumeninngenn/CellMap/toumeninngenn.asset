@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c3e2fd293409448b70e6699a65a249, type: 3}
+  m_Name: toumeninngenn
+  m_EditorClassIdentifier: 
+  ListDataCellMap:
+  - Name: jk01-000
+    SizeOriginal: {x: 174, y: 123}
+    ListCell:
+    - Name: Head
+      Rectangle:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 54
+        height: 54
+      Pivot: {x: 30, y: 49}
+    - Name: box
+      Rectangle:
+        serializedVersion: 2
+        x: 127
+        y: 75
+        width: 36
+        height: 34
+      Pivot: {x: 16, y: 4.9999995}
+    - Name: bady
+      Rectangle:
+        serializedVersion: 2
+        x: 74
+        y: 5
+        width: 47
+        height: 93
+      Pivot: {x: 25.38, y: 47}
+    - Name: Leg-left-00
+      Rectangle:
+        serializedVersion: 2
+        x: 11
+        y: 4
+        width: 17
+        height: 49
+      Pivot: {x: 12, y: 8.000001}
+    - Name: Leg-left-01
+      Rectangle:
+        serializedVersion: 2
+        x: 29
+        y: 2
+        width: 14
+        height: 56
+      Pivot: {x: 6, y: 10}
+    - Name: Leg-right-00
+      Rectangle:
+        serializedVersion: 2
+        x: 42
+        y: 4
+        width: 13
+        height: 46
+      Pivot: {x: 6, y: 9.000001}
+    - Name: Leg-right-01
+      Rectangle:
+        serializedVersion: 2
+        x: 56
+        y: 6
+        width: 14
+        height: 46
+      Pivot: {x: 6, y: 4.0000005}
+    - Name: Foot-left-00
+      Rectangle:
+        serializedVersion: 2
+        x: 13
+        y: 60
+        width: 17
+        height: 39
+      Pivot: {x: 11, y: 7.9999995}
+    - Name: Foot-left-01
+      Rectangle:
+        serializedVersion: 2
+        x: 31
+        y: 59
+        width: 11
+        height: 56
+      Pivot: {x: 7, y: 6.0000005}
+    - Name: Foot-left-02
+      Rectangle:
+        serializedVersion: 2
+        x: 1
+        y: 98
+        width: 25
+        height: 20
+      Pivot: {x: 8, y: 3}
+    - Name: Foot-right-00
+      Rectangle:
+        serializedVersion: 2
+        x: 44
+        y: 62
+        width: 14
+        height: 39
+      Pivot: {x: 6, y: 6.9999995}
+    - Name: Foot-right-01
+      Rectangle:
+        serializedVersion: 2
+        x: 61
+        y: 61
+        width: 11
+        height: 52
+      Pivot: {x: 5, y: 5.9999995}
+    - Name: Foot-right-02
+      Rectangle:
+        serializedVersion: 2
+        x: 41
+        y: 102
+        width: 22
+        height: 18
+      Pivot: {x: 6, y: 2.9999998}
+    - Name: Face-01
+      Rectangle:
+        serializedVersion: 2
+        x: 124
+        y: 57
+        width: 10
+        height: 9
+      Pivot: {x: 5, y: 4}
+    - Name: Face-03
+      Rectangle:
+        serializedVersion: 2
+        x: 141
+        y: 58
+        width: 4
+        height: 7
+      Pivot: {x: 2, y: 3.5}
+    - Name: Face-02
+      Rectangle:
+        serializedVersion: 2
+        x: 134
+        y: 58
+        width: 6
+        height: 8
+      Pivot: {x: 3, y: 3}
+    - Name: Iphone
+      Rectangle:
+        serializedVersion: 2
+        x: 156
+        y: 51
+        width: 12
+        height: 25
+      Pivot: {x: 6, y: 12.5}
+  - Name: kirakira
+    SizeOriginal: {x: 136, y: 136}
+    ListCell:
+    - Name: kirakira01
+      Rectangle:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 48
+        height: 67
+      Pivot: {x: 27, y: 30}
+    - Name: kirakira02
+      Rectangle:
+        serializedVersion: 2
+        x: 49
+        y: 49
+        width: 62
+        height: 74
+      Pivot: {x: 31, y: 37}

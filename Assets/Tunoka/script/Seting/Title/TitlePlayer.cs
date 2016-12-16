@@ -25,37 +25,42 @@ public class TitlePlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        _Player.transform.localPosition = Vector3.zero; 
-        if (_Movenum == 0)
+        if (_Movenum == 3)
         {
-            Move0();
-        }
-        if (_Movenum == 1)
-        {
-            Move1();
+            Move3();
         }
         if (_Movenum == 2)
         {
             Move2();
         }
-        if (_Movenum == 3)
+        if (_Movenum == 1)
         {
-            Move3();
+            Move1();
         }
+        if (_Movenum == 0)
+        {
+            Move0();
+        }
+        _Player.transform.localPosition = Vector3.zero;
+
+
 
     }
     void Move0()//待機
     {
-        Root.RateOpacity = 0.5f;
+        Root.RateOpacity = 0.0f;
         _cTime += Time.deltaTime;
-        if (_cTime >= 10)
+        if (_cTime >= 8)
         {
             _Movenum = 1;
         }
     }
     void Move1()//歩く
     {
-        Root.RateOpacity = 0.5f;
+        if (Root.RateOpacity <= 0.5f)
+        {
+            Root.RateOpacity += 0.01f;
+        }
         _cTime = 0;
         _xPos += _speed;
         transform.localPosition = new Vector3(_xPos,
@@ -63,8 +68,9 @@ public class TitlePlayer : MonoBehaviour {
                                               transform.localPosition.z);
         if (transform.localPosition.x >= 34)
         {
+            Root.RateOpacity += 0.0f;
             _Movenum = 3;
-            Root.AnimationPlay(1, 0, 0, 1);
+            Root.AnimationPlay(1, 1, 0, 1);
         }
     }
     void Move2()//バレル
@@ -73,5 +79,9 @@ public class TitlePlayer : MonoBehaviour {
     void Move3()//ポージング
     {
         Root.RateOpacity = 1;
+    }
+    public bool AnimEnd(GameObject objecto)
+    {
+        return true;
     }
 }
